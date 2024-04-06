@@ -1,0 +1,41 @@
+[*]
+[*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
+[*] Fri Jan 12 17:51:34 2024
+[*]
+[dumpfile] "C:\Users\Zerohidz\Desktop\Depo\DEVELOPMENT\Verilog\FinalProject\ARTAU.wave"
+[dumpfile_mtime] "Fri Jan 12 17:51:24 2024"
+[dumpfile_size] 152235
+[savefile] "C:\Users\Zerohidz\Desktop\Depo\DEVELOPMENT\Verilog\FinalProject\ARTAU.gtkw"
+[timestart] 0
+[size] 1707 897
+[pos] -9 -9
+*-29.160715 700000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] ARTAU_tb.
+[sst_width] 42
+[signals_width] 356
+[sst_expanded] 0
+[sst_vpaned_height] 300
+@28
+[color] 1
+ARTAU_tb.uut.CLK
+ARTAU_tb.uut.RST
+ARTAU_tb.uut.radar_echo
+ARTAU_tb.uut.scan_for_target
+@24
+ARTAU_tb.uut.jet_speed[31:0]
+ARTAU_tb.uut.max_safe_distance[31:0]
+@28
+[color] 2
+ARTAU_tb.uut.radar_pulse_trigger
+@24
+[color] 2
+ARTAU_tb.uut.distance_to_target[31:0]
+@28
+[color] 2
+ARTAU_tb.uut.threat_detected
+[color] 2
+ARTAU_tb.uut.ARTAU_state[1:0]
+@420
+ARTAU_tb.uut.pulse_count
+[pattern_trace] 1
+[pattern_trace] 0

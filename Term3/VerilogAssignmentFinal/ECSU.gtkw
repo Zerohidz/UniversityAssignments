@@ -1,0 +1,35 @@
+[*]
+[*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
+[*] Sat Dec 30 14:37:34 2023
+[*]
+[timestart] 0
+[size] 1920 1017
+[pos] -1 -1
+*-29.689548 1852000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] ECSU_tb.
+[sst_width] 211
+[signals_width] 345
+[sst_expanded] 1
+[sst_vpaned_height] 301
+@28
+[color] 1
+ECSU_tb.uut.CLK
+@29
+ECSU_tb.uut.RST
+@28
+ECSU_tb.uut.thunderstorm
+@24
+ECSU_tb.uut.wind[5:0]
+@28
+ECSU_tb.uut.visibility[1:0]
+@420
+ECSU_tb.uut.temperature[7:0]
+@28
+[color] 2
+ECSU_tb.uut.severe_weather
+[color] 2
+ECSU_tb.uut.emergency_landing_alert
+[color] 2
+ECSU_tb.uut.ECSU_state[1:0]
+[pattern_trace] 1
+[pattern_trace] 0

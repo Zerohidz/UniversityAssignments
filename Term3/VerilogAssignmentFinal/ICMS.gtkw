@@ -1,0 +1,47 @@
+[*]
+[*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
+[*] Sat Dec 30 20:47:14 2023
+[*]
+[timestart] 0
+[size] 1920 1017
+[pos] -139 -139
+*-30.034857 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] ICMS_tb.
+[sst_width] 42
+[signals_width] 222
+[sst_expanded] 0
+[sst_vpaned_height] 300
+@28
+[color] 1
+ICMS_tb.CLK
+ICMS_tb.RST
+ICMS_tb.radar_echo
+ICMS_tb.scan_for_target
+@24
+ICMS_tb.jet_speed[31:0]
+ICMS_tb.max_safe_distance[31:0]
+ICMS_tb.wind[5:0]
+@28
+ICMS_tb.thunderstorm
+ICMS_tb.visibility[1:0]
+@420
+ICMS_tb.temperature[7:0]
+@28
+[color] 2
+ICMS_tb.radar_pulse_trigger
+@24
+[color] 2
+ICMS_tb.distance_to_target[31:0]
+@28
+[color] 2
+ICMS_tb.safe_to_engage
+[color] 2
+ICMS_tb.threat_detected
+[color] 2
+ICMS_tb.emergency_landing_alert
+[color] 2
+ICMS_tb.ECSU_state[1:0]
+[color] 2
+ICMS_tb.ARTAU_state[1:0]
+[pattern_trace] 1
+[pattern_trace] 0
