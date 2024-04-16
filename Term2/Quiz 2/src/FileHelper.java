@@ -1,0 +1,42 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+// This is a helper file I wrote to help me on different projects
+// Dursun Zahid Korkmaz
+
+public class FileHelper {
+    public static String[] readAllLines(String filePath) {
+        try{
+            int i = 0;
+            int lenght = Files.readAllLines(Paths.get(filePath)).size();
+            String[] results = new String[lenght];
+            for (String line : Files.readAllLines(Paths.get(filePath))){
+                results[i++] = line;
+            }
+
+            return results;
+
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    public static boolean overwriteFile(String filePath, String[] lines) {
+        try {
+            Files.write(Paths.get(filePath), String.join(System.lineSeparator(), lines).getBytes());
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
+    public static boolean appendFile(String filePath, String[] lines) {
+        try {
+            Files.write(Paths.get(filePath), String.join(System.lineSeparator(), lines).getBytes(), StandardOpenOption.APPEND);
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+}
