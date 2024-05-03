@@ -1,0 +1,246 @@
+
+
+import java.util.*;
+import java.io.*;
+
+public class Quiz3 {
+    public static class Station {
+        public int x;
+        public int y;
+        public boolean isVisited = false;
+        public Station parentOfUnion = this;
+        public ArrayList<Station> visitedBy = new ArrayList<>();
+
+        public Station(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("Station(%d, %d) isVisited: %b parentOfUnion: (%d, %d)", x, y, isVisited, parentOfUnion.x, parentOfUnion.y);
+        }
+    }
+
+    public static class Connection {
+        public Station station1;
+        public Station station2;
+        public double distance;
+
+        public Connection(Station station1, Station station2, double distance) {
+            this.station1 = station1;
+            this.station2 = station2;
+            this.distance = distance;
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(new File(args[0])));
+
+        int numTestCase = Integer.parseInt(reader.readLine());
+        for (int i = 0; i < numTestCase; i++) {
+            String[] input = reader.readLine().split(" ");
+            int numDroneStations = Integer.parseInt(input[0]);
+            int numTotalStations = Integer.parseInt(input[1]);
+            int numGroundPumpStations = numTotalStations - numDroneStations;
+
+            ArrayList<Station> stations = new ArrayList<>();
+            for (int j = 0; j < numTotalStations; j++) {
+                input = reader.readLine().split(" ");
+                int x = Integer.parseInt(input[0]);
+                int y = Integer.parseInt(input[1]);
+                Station station = new Station(x, y);
+                stations.add(station);
+            }
+
+            ArrayList<Connection> connections = new ArrayList<>();
+            for (int j = 0; j < numTotalStations; j++) {
+                for (int k = 0; k < numTotalStations; k++) {
+                    if (j == k) {
+                        continue;
+                    }
+                    Station station1 = stations.get(j);
+                    Station station2 = stations.get(k);
+
+                    if (station1.visitedBy.contains(station2) || station2.visitedBy.contains(station1)) {
+                        continue;
+                    }
+
+                    double distance = Math.sqrt(Math.abs(station1.x - station2.x) * Math.abs(station1.x - station2.x)
+                            + Math.abs(station1.y - station2.y) * Math.abs(station1.y - station2.y));
+                    
+                    Connection connection = new Connection(station1, station2, distance);
+                    connections.add(connection);
+                    station1.visitedBy.add(station2);
+                    station2.visitedBy.add(station1);
+                }
+            }
+
+            Collections.sort(connections, new Comparator<Connection>() {
+                @Override
+                public int compare(Connection connection1, Connection connection2) {
+                    return Double.compare(connection1.distance, connection2.distance);
+                }
+            });
+
+            double distanceThreshold = 0;
+            for (int j = 0; j < numGroundPumpStations; j++) {
+                Connection connection = connections.get(j);
+
+                Station station1 = connection.station1;
+                Station station2 = connection.station2;
+
+                if ((station1.isVisited && station2.isVisited)) {
+                    if (station1.parentOfUnion == station2.parentOfUnion) {
+                        continue;
+                    }
+                }
+
+                distanceThreshold = connection.distance;
+                station1.isVisited = true;
+                station2.isVisited = true;
+
+                station2.parentOfUnion = station1.parentOfUnion;
+            }
+
+            System.out.printf("%.2f\n", distanceThreshold);
+        }
+
+        reader.close();
+    }
+}
+
+import java.util.*;
+// import java.io.*;
+
+// public class Quiz3 {
+//     public static class Station {
+//         public int x;
+//         public int y;
+//         public boolean isVisited = false;
+//         public Station parentOfUnion = this;
+//         public ArrayList<Station> visitedBy = new ArrayList<>();
+
+//         public Station(int x, int y) {
+//             this.x = x;
+//             this.y = y;
+//         }
+
+//         @Override
+//         public String toString() {
+//             return String.format("Station(%d, %d) isVisited: %b parentOfUnion: (%d, %d)", x, y, isVisited,
+//                     parentOfUnion.x, parentOfUnion.y);
+//         }
+//     }
+
+//     public static class Connection {
+//         public Station station1;
+//         public Station station2;
+//         public double distance;
+
+//         public Connection(Station station1, Station station2, double distance) {
+//             this.station1 = station1;
+//             this.station2 = station2;
+//             this.distance = distance;
+//         }
+
+//         public String getDistanceFormatted() {
+//             return String.format("%.2f", distance);
+//         }
+//     }
+
+//     public static void main(String[] args) throws IOException {
+//         BufferedReader reader = new BufferedReader(new FileReader(new File(args[0])));
+
+//         int numTestCase = Integer.parseInt(reader.readLine());
+//         numTestCase = 1;
+//         for (int i = 0; i < numTestCase; i++) {
+//             String[] input = reader.readLine().split(" ");
+//             int numDroneStations = Integer.parseInt(input[0]);
+//             int numTotalStations = Integer.parseInt(input[1]);
+//             int numGroundPumpStations = numTotalStations - numDroneStations;
+
+//             ArrayList<Station> stations = new ArrayList<>();
+//             for (int j = 0; j < numTotalStations; j++) {
+//                 input = reader.readLine().split(" ");
+//                 int x = Integer.parseInt(input[0]);
+//                 int y = Integer.parseInt(input[1]);
+//                 Station station = new Station(x, y);
+//                 stations.add(station);
+//             }
+
+//             ArrayList<Connection> connections = new ArrayList<>();
+//             for (int j = 0; j < numTotalStations; j++) {
+//                 for (int k = 0; k < numTotalStations; k++) {
+//                     if (j == k) {
+//                         continue;
+//                     }
+//                     Station station1 = stations.get(j);
+//                     Station station2 = stations.get(k);
+
+//                     if (station1.visitedBy.contains(station2) || station2.visitedBy.contains(station1)) {
+//                         continue;
+//                     }
+
+//                     double distance = Math.sqrt(Math.abs(station1.x - station2.x) * Math.abs(station1.x - station2.x)
+//                             + Math.abs(station1.y - station2.y) * Math.abs(station1.y - station2.y));
+
+//                     Connection connection = new Connection(station1, station2, distance);
+//                     connections.add(connection);
+//                     station1.visitedBy.add(station2);
+//                     station2.visitedBy.add(station1);
+//                 }
+//             }
+
+//             Collections.sort(connections, new Comparator<Connection>() {
+//                 @Override
+//                 public int compare(Connection connection1, Connection connection2) {
+//                     return Double.compare(connection1.distance, connection2.distance);
+//                 }
+//             });
+
+//             ArrayList<Connection> selectedConnections = new ArrayList<>();
+//             for (int j = 0; j < connections.size() - 1; j++) {
+//                 Connection connection = connections.get(j);
+
+//                 Station station1 = connection.station1;
+//                 Station station2 = connection.station2;
+
+//                 System.out.println("Connection of: " + station1);
+//                 System.out.println("\t   and " + station2);
+//                 System.out.println("\t   distance: " + connection.getDistanceFormatted());
+//                 if ((station1.isVisited && station2.isVisited)) {
+//                     if (station1.parentOfUnion == station2.parentOfUnion) {
+//                         System.out.println("Not connected them they are bad!!");
+//                         System.out.println();
+//                         continue;
+//                     }
+//                 }
+//                 System.out.println("Connected them!!");
+//                 System.out.println();
+
+//                 if (station1.isVisited && !station2.isVisited) {
+//                     station2.parentOfUnion = station1.parentOfUnion;
+//                 } else if (!station1.isVisited && station2.isVisited) {
+//                     station1.parentOfUnion = station2.parentOfUnion;
+//                 } else {
+//                     station2.parentOfUnion = station1.parentOfUnion;
+//                 }
+
+//                 station1.isVisited = true;
+//                 station2.isVisited = true;
+
+//                 selectedConnections.add(connection);
+
+//                 if (selectedConnections.size() == numTotalStations - 1) {
+//                     break;
+//                 }
+//             }
+
+//             double distanceThreshold = selectedConnections.get(numGroundPumpStations - 1).distance;
+//             System.out.printf("%.2f\n", distanceThreshold);
+//         }
+
+//         reader.close();
+//     }
+// }
